@@ -1,53 +1,144 @@
-#title{
+#title {
     color: #3a305e
 }
-body{
+
+body {
     background-color: #f5f5f5;
     align-items: center;
     justify-content: center;
     display: flex;
     flex-direction: column;
 }
-#gamefield{
+
+#gamefield {
     border: 1px solid #3a305e;
     display: grid;
     width: fit-content;
 }
+
 #background {
     grid-area: 1/1;
-    width: calc(16 * 32px);
-    height: calc(12 * 32px);
+    display: grid;
+    grid-template-columns: repeat(var(--GRID_WIDTH), max-content);
 }
+
+#background .tile {
+    width: var(--TILE_SIZE);
+    aspect-ratio: 1/1;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    image-rendering: pixelated;
+}
+
+.tile.path {
+    background-image: url('images/tiles/path.png');
+}
+
+.tile.flower {
+    background-image: url('images/tiles/flowers.png');
+}
+
+.tile.wall {
+    background-image: url('images/tiles/wall.png');
+}
+
+.tile.water {
+    background-image: url('images/tiles/water.png');
+}
+
+.tile.tree {
+    background-image: url('images/tiles/tree.png');
+}
+
+.tile.rock {
+    background-image: url('images/tiles/rock.png');
+}
+
+.tile.grass {
+    background-image: url('images/tiles/grass.png');
+}
+
+.tile.gate {
+    background-image: url('images/tiles/gate.png');
+}
+
+.tile.door {
+    background-image: url('images/tiles/door.png');
+}
+
+.tile.lava {
+    background-image: url('images/tiles/lava.png');
+}
+
+
 #items {
-    grid-area: 1/1;
-} 
+    grid-area: 1 / 1;
+    display: grid;
+    grid-template-columns: repeat(var(--GRID_WIDTH), max-content);
+}
+
+#items .item {
+    width: var(--TILE_SIZE);
+    aspect-ratio: 1/1;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    image-rendering: pixelated;
+}
+
+.item.gold {
+    background-image: url('images/items/gold.png');
+}
+
 #characters {
     grid-area: 1/1;
 }
+#enemy {
+    width: 26px;
+    aspect-ratio: 16/20;
+    background-image: url('images/characters/Character 1.png');
+    background-size: 400% 400%;
+    image-rendering: pixelated;
+    background-position: -0% 0%;
+
+}
+
 #player {
-    width: 32px;
+    width: 26px;
     aspect-ratio: 16/20;
     background-image: url('images/characters/Character 10.png');
     background-size: 400% 400%;
     image-rendering: pixelated;
     background-position: -0% 0%;
-   
+
+}
+#attack {
+    width: 26px;
+    aspect-ratio: 16/20;
+    background-image: url('images\weapons\arrow.png');
+    background-size: 400% 400%;
+    image-rendering: pixelated;
+    background-position: -0% 0%;
+
 }
 
-#player.animate{
+#player.animate {
     animation-duration: 1s;
     animation-timing-function: steps(4);
     animation-iteration-count: infinite;
 }
+
 #player.down {
     animation-name: down;
 }
+
 #player.up {
     animation-name: up;
 }
+
 #player.left {
     animation-name: left;
 }
+
 #player.right {
     animation-name: right;
 }
@@ -57,6 +148,7 @@ body{
     from {
         background-position: 0% 0%;
     }
+
     to {
         background-position: -400% 0%;
     }
@@ -66,23 +158,56 @@ body{
     from {
         background-position: 0% -100%;
     }
+
     to {
         background-position: -400% -100%;
     }
 }
+
 @keyframes left {
     from {
         background-position: 0% -200%;
     }
+
     to {
         background-position: -400% -200%;
     }
 }
+
 @keyframes right {
     from {
         background-position: 0% -300%;
     }
+
     to {
         background-position: -400% -300%;
     }
+}
+
+.highlight {
+    outline: 2px dashed #000000;
+    translate: 0 0;
+}
+
+.show-rect {
+    outline: 2px solid #e70909;
+    translate: 0 0;
+}
+
+.show-reg-point::before {
+    content: "";
+    position: absolute;
+    background-color: cyan;
+    width: 3px;
+    height: 3px;
+    translate: var(--regX) var(--regY);
+}
+
+.show-hitbox::before {
+    content: "";
+    position: absolute;
+    background-color: rgb(25, 194, 19);
+    width: var(--hitW);
+    height: var(--hitH);
+    translate: var(--hitX) var(--hitY);
 }
